@@ -94,8 +94,7 @@ module RN
         def call(**options)
           book = options[:book]
           global = options[:global]
-
-          warn "TODO: Implementar listado de las notas del libro '#{book}' (global=#{global}).\nPodés comenzar a hacerlo en #{__FILE__}:#{__LINE__}."
+          Models::Note.instance.list(book,global)
         end
       end
 
@@ -113,7 +112,8 @@ module RN
 
         def call(title:, **options)
           book = options[:book]
-          warn "TODO: Implementar vista de la nota con título '#{title}' (del libro '#{book}').\nPodés comenzar a hacerlo en #{__FILE__}:#{__LINE__}."
+          book = book.nil? ? 'Global-Book' : book
+          Models::Note.instance.show(title,book)
         end
       end
     end

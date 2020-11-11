@@ -11,6 +11,7 @@ module RN
         return ROOT_DIRECTORY + '/' + directory.to_s
       end
 
+
       def get_root_directory_path()
         return ROOT_DIRECTORY
       end
@@ -18,6 +19,7 @@ module RN
       def add_rn_extension(a_file)
         return a_file + '.rn'
       end
+      
     
     end
   end
