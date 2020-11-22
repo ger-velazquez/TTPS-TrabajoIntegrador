@@ -74,9 +74,9 @@ module RN
       end
 
       def change_title(old,new_name, book)
-        if (self.validate_title(a_title))
+        if (self.validate_title(new_name))
           self.print_successful()
-          File.rename(self.get_note_path(old, book), self.get_book_path(book) + '/' + new_name  )
+          File.rename(self.get_note_path(old, book), self.get_book_path(book) + '/' + add_rn_extension(new_name)  )
         else
           self.print_invalid_title()
         end
