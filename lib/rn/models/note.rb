@@ -125,7 +125,7 @@ module RN
         if all == true
           self.export_all_notes(type_of_format)
         else 
-          if !title.nil?
+          if !title.nil? && self.book_exist?(book)
             self.note_exist?(title,book) ? self.export_note(title,book,type_of_format) : self.print_note_not_exist()
           else
             self.book_exist?(book) ? self.export_notes_from_book(book,type_of_format) : self.print_book_not_exist()     

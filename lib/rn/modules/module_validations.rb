@@ -38,7 +38,7 @@ module RN
       end
 
       def verify_exporter_directory()
-        File.exist?(EXPORTS_DIRECTORY) ? self.print_exports_drectory_create() : self.create_exports_directory()
+        File.exist?(EXPORTS_DIRECTORY) ? true : self.create_exports_directory()
       end
 
       def verify_exporter_book_directory(directory)

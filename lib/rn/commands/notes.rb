@@ -139,7 +139,6 @@ module RN
           title = options[:title]
           all = options[:all]
           type_of_format = options[:format]
-          puts title.class
           type_of_format = type_of_format.nil? ? 'html' : type_of_format.downcase
           Models::Note.instance.export(title,book,all,type_of_format)
         end
