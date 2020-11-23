@@ -5,6 +5,7 @@ module RN
       include RN::Modules::Paths
       include RN::Modules::Eliminator
       include RN::Modules::Renderer
+      include RN::Modules::Exporter
 
       @instance = new 
   
@@ -15,7 +16,6 @@ module RN
       end
 
       def add_note(name,book)
-        self.verify_root_directory()
         if (self.validate_title(name))
           self.print_successful()
           File.new(self.get_book_path(book) + '/' + self.add_rn_extension(name), 'w' )
@@ -95,6 +95,41 @@ module RN
           end
         else
           self.print_note_exist()
+        end
+      end
+
+
+      def export_note(title,book,type_of_format)
+        self.exporter_export_note(title,book,type_of_format)
+      end
+
+      def export_all_notes(type_of_format)
+        all_books = Dir.children(self.get_root_directory_path())
+        all_books.each_with_index do |book,index|
+          self. export_notes_from_book(book,type_of_format)
+        end        
+      end
+
+      def export_notes_from_book(book,type_of_format)
+        all_notes = Dir.children(self.get_book_path(book))
+        all_notes.each_with_index do |note,index|
+          self.export_note(note.split('.')[0],book,type_of_format)
+        end        
+      end
+
+      
+      
+      def export(title=nil,book,all,type_of_format)
+        self.verify_root_directory()
+        self.verify_exporter_directory()
+        if all == true
+          self.export_all_notes(type_of_format)
+        else 
+          if !title.nil?
+            self.note_exist?(title,book) ? self.export_note(title,book,type_of_format) : self.print_note_not_exist()
+          else
+            self.book_exist?(book) ? self.export_notes_from_book(book,type_of_format) : self.print_book_not_exist()     
+          end
         end
       end
 

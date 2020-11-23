@@ -19,6 +19,10 @@ module RN
         File.exist?(ROOT_DIRECTORY) ? true : self.create_root_and_global_directory()
       end
 
+      def create_exports_directory()
+        Dir.mkdir(EXPORTS_DIRECTORY)
+      end
+
       def book_exist?(directory)
         return File.exist?(ROOT_DIRECTORY + '/' + directory.to_s)
       end
@@ -31,6 +35,19 @@ module RN
           return File.exist?(self.get_note_path(note, book))
         end
         
+      end
+
+      def verify_exporter_directory()
+        File.exist?(EXPORTS_DIRECTORY) ? self.print_exports_drectory_create() : self.create_exports_directory()
+      end
+
+      def verify_exporter_book_directory(directory)
+        File.exist?(EXPORTS_DIRECTORY + '/' + directory.to_s) ? true : self.create_exporter_book_directory(directory)
+      end
+
+      def create_exporter_book_directory(book)
+        self.print_create_exporter_book_directory(book)
+        Dir.mkdir(EXPORTS_DIRECTORY + '/' + book)
       end
 
 
