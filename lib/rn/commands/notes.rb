@@ -122,7 +122,7 @@ module RN
 
         option :title, type: :string, desc: 'Title of a particular note'
         option :book, type: :string, desc: 'Book'
-        option :all, type: :boolean, default: :false, desc: 'export all books inside my_rns'
+        option :all, type: :boolean, desc: 'export all books inside my_rns'
         option :format, type: :string, desc: 'Format'
 
         example [
@@ -130,16 +130,14 @@ module RN
           '--title todo --book "My book" #Export a note title todo from the book My Book ',
           '--book "Another Book"         #Export all notes from the book Another Book ',
           '--all                         #Export all notes from all the books',
-          '--format "html"               #Export thee required content in html format'
+         # '--format "html"               #Export thee required content in html format'
         ]
 
         def call(**options)
           book = options[:book]
-          book = book.nil? ? 'Global-Book' : book
           title = options[:title]
           all = options[:all]
           type_of_format = options[:format]
-          type_of_format = type_of_format.nil? ? 'html' : type_of_format.downcase
           Models::Note.instance.export(title,book,all,type_of_format)
         end
 

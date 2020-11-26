@@ -13,10 +13,6 @@ module RN
         self.print_export_succefull(new_file_path)
       end
       
-      def exporter_export_all_notes(type_of_format)
-        
-
-      end
 
       def exporter_export_note(title,book,type_of_format)
         if type_of_format == 'html'    
@@ -24,13 +20,11 @@ module RN
           markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
           new_content =  markdown.render(content_to_serialize)
           self.create_export_file(new_content,title,book,type_of_format)
+        else 
+          self.print_invalid_format(type_of_format)
         end
       end
 
-      def exporter_export_notes_from_book(book,type_of_format)
-
-      end
-      
 
     end
   end 

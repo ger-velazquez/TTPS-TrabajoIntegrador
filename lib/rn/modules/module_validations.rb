@@ -27,6 +27,10 @@ module RN
         return File.exist?(ROOT_DIRECTORY + '/' + directory.to_s)
       end
 
+      def arguments_are_nil(*args)
+        return !args.any?
+      end
+
       def note_exist?(note,book)
         if !self.book_exist?(book)
           self.print_book_not_exist()

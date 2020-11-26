@@ -117,11 +117,14 @@ module RN
         end        
       end
 
-      
-      
       def export(title=nil,book,all,type_of_format)
+        if (self.arguments_are_nil(title, book, type_of_format, all))
+          return self.print_tip()
+        end
         self.verify_root_directory()
         self.verify_exporter_directory()
+        book = book.nil? ? 'Global-Book' : book
+        type_of_format = type_of_format.nil? ? 'html' : type_of_format.downcase
         if all == true
           self.export_all_notes(type_of_format)
         else 
