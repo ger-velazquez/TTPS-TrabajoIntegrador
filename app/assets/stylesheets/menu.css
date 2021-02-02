@@ -1,0 +1,7 @@
+.menu-item {
+    font-size: 150%;
+    background-color: darkred;
+    color: white !important;
+    font-weight: bolder;
+    font-family: 'Montserrat', sans-serif;
+}
