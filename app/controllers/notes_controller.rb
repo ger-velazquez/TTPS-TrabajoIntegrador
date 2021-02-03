@@ -1,10 +1,18 @@
 class NotesController < ApplicationController
+  include ActionController::Cookies
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @filter_book = params[:book]
+    @books_titles = BookService.instance.get_all_user_books_titles(current_user.id).to_a
+
+    if @filter_book == 'all'
+      @notes = NoteService.instance.get_all_notes
+    else
+      @notes = NoteService.instance.get_notes_by_book_title(@filter_book, current_user.id)
+    end
   end
 
   # GET /notes/1

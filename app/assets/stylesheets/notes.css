@@ -1,0 +1,43 @@
+@import "./main.css";
+
+.new-note-ref {
+    font-size: 200%;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.cards-notes {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.custom-card {
+    border-radius: 20px;
+    margin-bottom: 3%;
+}
+
+.notes-main-title {
+    padding-top: 3%;
+    font-size: 500%;
+    margin-bottom: 5%;
+    font-weight: bolder;
+}
+
+.note-title {
+    font-size: 222%;
+    font-weight: bolder;
+    line-height: 100%;
+}
+
+.note-content {
+    font-size: 180%;
+    color: gray;
+    font-weight: bolder;
+    margin-bottom: 5%;
+    line-height: 100%;
+}
+
+.crud-items {
+    color: darkred !important;
+    font-weight: bolder;
+}
