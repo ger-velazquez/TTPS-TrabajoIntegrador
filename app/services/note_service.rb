@@ -16,4 +16,8 @@ class NoteService
     Note.where(:book_id => book_id)
   end
 
+  def get_notes_associated_amount(book_id)
+    Note.where(:book_id => book_id).count('id')
+  end
+
 end

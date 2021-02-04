@@ -5,6 +5,14 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    @notes_amount_by_book = {}
+    @books.each do |book|
+      @notes_amount_by_book.store(book.id, BookService.instance.get_notes_associated_amount(book['id']))
+    end
+    puts '---------adsadadads'
+    puts @notes_amount_by_book
+    puts '---------------------'
+    @books
   end
 
   # GET /books/1

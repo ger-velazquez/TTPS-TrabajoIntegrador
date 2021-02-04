@@ -1,0 +1,32 @@
+@import "./main.css";
+
+.books-main-title {
+    padding-top: 3%;
+    font-size: 500%;
+    margin-bottom: 5%;
+    font-weight: bolder;
+}
+
+.new-book-ref {
+    font-size: 200%;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.book-title {
+    font-size: 222%;
+    font-weight: bolder;
+    line-height: 100%;
+}
+
+.book-content {
+    font-size: 180%;
+    color: gray;
+    font-weight: bolder;
+    margin-bottom: 5%;
+    line-height: 100%;
+}
+
+.custom-book-card {
+    margin-bottom: 3%;
+}
