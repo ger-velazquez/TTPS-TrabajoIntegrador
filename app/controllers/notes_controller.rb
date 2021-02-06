@@ -5,22 +5,24 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    puts '---PARAMETROSS-------'
-    puts params.inspect
-    puts '===================='
     @filter_book = params[:book].nil? ? 'all' : params[:book]
-    @books_titles = BookService.instance.get_all_user_books_titles(current_user.id).to_a.push('all')
+    user_books = BookService.instance.get_all_user_books(current_user.id)
+    @books_titles = user_books.map { |book| book['title'] }.push('all')
 
     if @filter_book == 'all'
       @notes = NoteService.instance.get_all_notes(current_user.id)
     else
       @notes = NoteService.instance.get_notes_by_book_title(@filter_book, current_user.id)
     end
-    book_and_notes = Has.new
+
+    @books_and_notes_titles = {}
     @notes.each do |note|
-      book_and_notes # TO DO: OBTENER LOS TITULOS DE CADA NOTE
+      @books_and_notes_titles.store(note.id, user_books.find { |book| book.id = note.book_id }.title)
     end
 
+    puts 'PRUEBAAAAAAAAAAAAAAAAAAAA'
+    puts @books_and_notes_titles
+    puts '========================='
   end
 
   # GET /notes/1
@@ -31,7 +33,7 @@ class NotesController < ApplicationController
   # GET /notes/new
   def new
     @note = Note.new
-    @user_books = BookService.instance.get_all_user_books_titles(current_user.id)
+    @user_books = BookService.instance.get_all_user_books(current_user.id).map { |book| book['title'] }
 
   end
 
