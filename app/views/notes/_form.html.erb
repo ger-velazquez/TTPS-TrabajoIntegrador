@@ -22,11 +22,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :book_id %>
-    <%= form.text_field :book_id %>
+    <%= form.label :book %>
+    <%= form.select("book", options_for_select(@user_books) ) %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+
 <% end %>

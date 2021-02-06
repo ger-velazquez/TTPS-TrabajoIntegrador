@@ -7,12 +7,22 @@ class NoteService
     @instance
   end
 
-  def get_all_notes
-    Note.all
+  def get_all_notes(user_id)
+    result = []
+    sql_query = "SELECT n.id " + 
+                "FROM books b INNER JOIN users u on u.id = b.user_id " +
+                "INNER JOIN notes n on n.book_id = b.id " + 
+                "WHERE user_id = #{user_id} "
+    records_array = ActiveRecord::Base.connection.exec_query(sql_query).to_a
+    result = records_array.map { |note|
+      Note.find_by_id(note['id'])
+    }
+
+    result
   end
 
   def get_notes_by_book_title(book_title, user_id)
-    book_id = BookService.get_user_book_by_title(book_title, user_id).id
+    book_id = BookService.instance.get_user_book_by_title(book_title, user_id).id
     Note.where(:book_id => book_id)
   end
 
@@ -21,3 +31,7 @@ class NoteService
   end
 
 end
+
+# sql_query = "SELECT * " + 
+# "FROM books b INNER JOIN users u on u.id = b.user_id " +
+# "INNER JOIN notes n on n.book_id = b.id"

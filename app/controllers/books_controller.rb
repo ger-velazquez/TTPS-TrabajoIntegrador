@@ -4,14 +4,12 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.where(:user_id => current_user.id)
     @notes_amount_by_book = {}
     @books.each do |book|
       @notes_amount_by_book.store(book.id, BookService.instance.get_notes_associated_amount(book['id']))
     end
-    puts '---------adsadadads'
-    puts @notes_amount_by_book
-    puts '---------------------'
+
     @books
   end
 
@@ -32,7 +30,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(title: book_params[:title], user_id: current_user.id)
 
     respond_to do |format|
       if @book.save
@@ -62,6 +60,13 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    if @book.title == 'Global'
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'The Global Book can not be deleted.' }
+        format.json { head :no_content }
+      end
+      return
+    end
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }

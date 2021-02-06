@@ -3,7 +3,11 @@
 <div>
   <h1 class="text-center notes-main-title">Notes</h1>
   <div>
-    <%= select_tag("book-filters", options_for_select(@books_titles, @filter_book) ) %>
+    <%= form_with url: "/notes", method: :get do |f| %>
+      <%= f.select("book", options_for_select(@books_titles, @filter_book) ) %>
+      <%= f.submit "Filter" %>
+    <% end %>
+    
   </div>
     
   <div class="new-note-ref">
@@ -17,11 +21,14 @@
 
       <div class="card custom-card">
         <div class="card-header note-title">
-          <%= note.title %>
+          <%= note['title'] %>
         </div>
         <div class="card-body">
-          <div class="note-content"> <%= note.content %> </div>
+          <div class="note-content"> <%= note['content'] %> </div>
 
+
+          <div class='row justify-content-start'>
+          </div>
           <div class='row justify-content-end'>
             <div class='margin-right-1 crud-items'> <%= link_to 'Edit', edit_note_path(note) %> </div>
             <div class='margin-right-1 crud-items'> <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
