@@ -1,19 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
+<div class="card custom-card">
+        <div class="card-header note-title">
+          <%= @note.title %>
+        </div>
+        <div class="card-body">
+          <div class="note-content"> <%= @note.content %> </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @note.content %>
-</p>
-
-<p>
-  <strong>Book:</strong>
-  <%= @note.book_id %>
-</p>
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
 <%= link_to 'Back', notes_path %>

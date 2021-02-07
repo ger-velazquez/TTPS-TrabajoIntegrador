@@ -20,19 +20,23 @@
     <% @notes.each do |note| %>
 
       <div class="card custom-card">
-        <div class="card-header note-title">
+        <div class="card-header">
+        <div class='note-title'>
           <%= note['title'] %>
         </div>
-        <div class="card-body">
-          <div class="note-content"> <%= note['content'] %> </div>
-
-
-          <div class='row justify-content-start'>
-            Book: <%= @books_and_notes_titles[note['id']] %>
+          <div class='d-flex justify-content-end'>
+            <span style="font-weight: bolder">Belongs to the book - </span> <%= @books_and_notes_titles[note['id']] %>
           </div>
+        </div>
+        <div class="card-body">
+          <div class="note-content">
+            <%= note.content %>
+          </div>
+
           <div class='row justify-content-end'>
+            <div class='margin-right-1 crud-items'> <%= link_to 'Show', note %> </div>
             <div class='margin-right-1 crud-items'> <%= link_to 'Edit', edit_note_path(note) %> </div>
-            <div class='margin-right-1 crud-items'> <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+            <div class='margin-right-1 crud-items'> <%= link_to 'Delete', note, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
           </div>
 
         </div>

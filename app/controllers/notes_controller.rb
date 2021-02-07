@@ -38,13 +38,14 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+    @user_books = BookService.instance.get_all_user_books(current_user.id).map { |book| book['title'] }
+    @note = Note.find_by_id(params[:id])
   end
 
   # POST /notes
   # POST /notes.json
   def create
     book_id = BookService.instance.get_user_book_by_title(params[:note][:book], current_user.id).id
-
     @note = Note.new(title: note_params[:title], content: note_params[:content], book_id: book_id)
     respond_to do |format|
       if @note.save
@@ -76,7 +77,7 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      format.html { redirect_to notes_url, notice: 'Note was successfully deleted.' }
       format.json { head :no_content }
     end
 
