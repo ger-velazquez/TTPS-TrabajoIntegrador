@@ -6,8 +6,7 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @filter_book = params[:book].nil? ? 'all' : params[:book]
-    user_books = BookService.instance.get_all_user_books(current_user.id)
-    @books_titles = user_books.map { |book| book['title'] }.push('all')
+    user_books = BookService.instance.get_all_user_books(current_user.id).to_a
 
     if @filter_book == 'all'
       @notes = NoteService.instance.get_all_notes(current_user.id)
@@ -17,12 +16,12 @@ class NotesController < ApplicationController
 
     @books_and_notes_titles = {}
     @notes.each do |note|
-      @books_and_notes_titles.store(note.id, user_books.find { |book| book.id = note.book_id }.title)
+      title = user_books.detect { |book| note['book_id'] == book.id }.title
+      @books_and_notes_titles.store(note.id, title)
     end
 
-    puts 'PRUEBAAAAAAAAAAAAAAAAAAAA'
-    puts @books_and_notes_titles
-    puts '========================='
+    @books_titles =user_books.map { |book| book.title }.push('all')
+
   end
 
   # GET /notes/1
