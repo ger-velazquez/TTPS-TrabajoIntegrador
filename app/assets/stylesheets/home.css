@@ -1,0 +1,28 @@
+.home-title {
+    font-size: 300%;
+    margin-bottom: 5%;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 5%;
+    line-height: 100%;
+}
+.home-intro {
+    font-size: 173%;
+    text-align: justify;
+    line-height: 120%;
+    color: grey; 
+}
+
+.home-functionalities-item {
+    font-size: 140%;
+    color: black;
+    padding-bottom: 2%;
+
+}
+
+.home-ruby-image {
+    background-image: url('ruby_on_rails.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
