@@ -10,14 +10,17 @@
     font-size: 173%;
     text-align: justify;
     line-height: 120%;
-    color: grey; 
+    color: grey;
+    font-family: 'Montserrat'!important; 
+    font-weight: bolder;
 }
 
 .home-functionalities-item {
     font-size: 140%;
     color: black;
     padding-bottom: 2%;
-
+    font-family: 'Montserrat'!important;
+    font-weight: bold; 
 }
 
 .home-ruby-image {
@@ -25,4 +28,5 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    height: 230px;
 }
